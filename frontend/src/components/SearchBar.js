@@ -40,7 +40,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form className="w-full max-w-80" onSubmit={handleSearch}>
+    <form className="w-full" onSubmit={handleSearch}>
       {/* Search input - full width */}
       <div className="mb-2">
         <input

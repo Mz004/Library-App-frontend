@@ -78,7 +78,7 @@ const SearchBar = () => {
         {/* Search button */}
         <button
           type="submit"
-          className={`btn btn-primary h-auto w-2/5 ${isSubmitting ? 'loading h-1 w-1' : ''}`}
+          className={`btn btn-primary h-auto w-2/5 ${isSubmitting ? 'opacity-40' : ''}`}
           disabled={isSubmitting || searchValue.trim() === ''} // Disable button if empty or submitting
         >
           {isSubmitting ? 'Searching...' : 'Search'}

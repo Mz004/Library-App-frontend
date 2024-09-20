@@ -24,13 +24,13 @@ const BooksPage = () => {
     setLoading(true);
     setError('');
     try {
-      let url = `${config.baseURL}/api/book?page=${currentPage}&limit=18`;
+      let url = `${config.baseURL}/api/book?page=${currentPage}&limit=24`;
       if (searchQuery.title || searchQuery.author || searchQuery.category) {
         const params = new URLSearchParams();
         if (searchQuery.title) params.append('title', searchQuery.title);
         if (searchQuery.author) params.append('author', searchQuery.author);
         if (searchQuery.category) params.append('category', searchQuery.category);
-        url = `${config.baseURL}/api/book/search?${params.toString()}&page=${currentPage}&limit=12`;
+        url = `${config.baseURL}/api/book/search?${params.toString()}&page=${currentPage}&limit=24`;
       }
       const res = await fetch(url);
       if (!res.ok) {

@@ -58,7 +58,7 @@ const EditBookPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch(`https://library-app-f2pc.onrender.com/api/book/${isbn13}`, {
+      const res = await fetch(`${config.baseURL}/api/book/${isbn13}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const EditBookPage = () => {
     if (!confirm('Are you sure you want to delete this book?')) return;
     setError('');
     try {
-      const res = await fetch(`https://library-app-f2pc.onrender.com/api/book/${isbn13}`, {
+      const res = await fetch(`${config.baseURL}/api/book/${isbn13}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const EditBookPage = () => {
       <Head>
         <title>Edit Books</title>
       </Head>
-      <div className="container mx-auto py-8 px-40">
+      <div className="container mx-auto py-8 px-4 sm:px-12 md:px-24 xl:px-40">
         <h1 className="text-4xl font-bold mb-4 text-primary">Edit Book</h1>
         <form onSubmit={handleUpdate} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -158,7 +158,7 @@ const EditBookPage = () => {
             <textarea
             name="description"
             placeholder="Description"
-            className="textarea textarea-bordered w-full my-2 col-span-2"
+            className="textarea textarea-bordered w-full my-2 md:col-span-2"
             value={formData.description}
             onChange={handleChange}
             ></textarea>

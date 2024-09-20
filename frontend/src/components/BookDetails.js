@@ -77,12 +77,12 @@ const BookDetails = ({ book, onClose }) => {
   return (
     <div className="modal modal-open">
       <div className="modal-box max-w-4xl relative">
-        <button className="btn btn-sm btn-circle absolute right-2 top-2" onClick={onClose}>
+        <button className="btn btn-sm btn-circle absolute z-50 right-2 top-2" onClick={onClose}>
           ✕
         </button>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-1/3">
-            <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
+            <div className="relative w-54 h-72 sm:w-72 sm:h-96 bg-transparent rounded-lg overflow-hidden">
               <Image
                 src={book.thumbnail || '/images/placeholder.png'}
                 alt={book.title}

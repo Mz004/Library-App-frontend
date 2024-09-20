@@ -6,40 +6,84 @@ const SearchBar = () => {
   const [, setSearchQuery] = useAtom(searchQueryAtom);
   const [searchType, setSearchType] = useState('title');
   const [searchValue, setSearchValue] = useState('');
+  const [error, setError] = useState(null); // For error handling
+  const [isSubmitting, setIsSubmitting] = useState(false); // For loading state
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
+    setError(null); // Reset error before search
+
     if (searchValue.trim() === '') {
-      alert('Please enter a value.');
+      setError('Please enter a search value.');
       return;
     }
-    setSearchQuery((prev) => ({
-      ...prev,
-      [searchType]: searchValue,
-    }));
+
+    try {
+      setIsSubmitting(true); // Start loading state
+
+      // Simulate search query logic
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating an API call delay
+
+      setSearchQuery((prev) => ({
+        ...prev,
+        [searchType]: searchValue,
+      }));
+
+      // Clear input after search if needed
+      setSearchValue('');
+    } catch (err) {
+      // Handle any errors that might occur
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false); // End loading state
+    }
   };
 
   return (
-    <form className="flex space-x-2" onSubmit={handleSearch}>
-      <select
-        name="searchType"
-        value={searchType}
-        onChange={(e) => setSearchType(e.target.value)}
-        className="select select-bordered select-primary text-base-content"
-      >
-        <option value="title">Title</option>
-        <option value="author">Author</option>
-        <option value="category">Category</option>
-      </select>
-      <input
-        type="text"
-        name="searchValue"
-        placeholder={`Search by ${searchType}`}
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        className="input input-bordered input-primary w-full max-w-xs"
-      />
-      <button type="submit" className="btn btn-primary">Search</button>
+    <form className="w-full max-w-80" onSubmit={handleSearch}>
+      {/* Search input - full width */}
+      <div className="mb-2">
+        <input
+          type="text"
+          name="searchValue"
+          placeholder={`Search by ${searchType}`}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          className="input input-bordered input-primary w-full"
+          disabled={isSubmitting} // Disable input while submitting
+        />
+      </div>
+
+      {/* Error message display */}
+      {error && (
+        <p className="text-red-500 mb-2">
+          {error}
+        </p>
+      )}
+
+      <div className="flex flex-row space-x-2 space-y-0">
+        {/* Dropdown for search type */}
+        <select
+          name="searchType"
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value)}
+          className="select select-bordered border-primary select-primary w-3/5"
+          disabled={isSubmitting} // Disable dropdown while submitting
+        >
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="category">Category</option>
+        </select>
+
+        {/* Search button */}
+        <button
+          type="submit"
+          className={`btn btn-primary h-auto w-2/5 ${isSubmitting ? 'loading w-1.5' : ''}`}
+          disabled={isSubmitting || searchValue.trim() === ''} // Disable button if empty or submitting
+        >
+          {isSubmitting ? 'Searching...' : 'Search'}
+        </button>
+      </div>
     </form>
   );
 };

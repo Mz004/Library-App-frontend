@@ -96,7 +96,7 @@ const AddBookPage = () => {
             <div className="text-center">
             <button
                 type="submit"
-                className={`btn btn-primary w-1/3 mt-6 ${isSubmitting ? 'loading' : ''}`}
+                className={`btn btn-primary min-w-fit w-1/3 mt-6 ${isSubmitting ? 'loading' : ''}`}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Add Book'}

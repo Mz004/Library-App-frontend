@@ -2,10 +2,10 @@ import Image from 'next/image';
 
 const BookCard = ({ book, onDetailsClick }) => {
   return (
-    <div className="card bg-inherit backdrop:blur-lg bg-opacity-100 shadow-lg rounded-lg p-6 mb-6 flex flex-col items-center w-52 transition-transform transform hover:scale-105 hover:shadow-xl">
+    <div className="card bg-base-200 backdrop:blur-lg bg-opacity-100 shadow-lg rounded-lg p-4 mb-6 flex flex-col items-center w-52 transition-transform transform hover:scale-105 hover:shadow-xl">
       {/* Book Image */}
       <div className="w-full flex flex-col items-center relative">
-        <div className="relative w-36 h-48 bg-transparent rounded-lg overflow-hidden shadow-md">
+        <div className="relative w-40 h-52 bg-transparent rounded-lg overflow-hidden shadow-md">
           <Image
             src={book.thumbnail || '/images/placeholder.png'}
             alt={book.title}
